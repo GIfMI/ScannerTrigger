@@ -2,6 +2,7 @@
 Python module implementing a wrapper script for multiple devices which can act as a MRI scanner trigger.
 
 1. INTRODUCTION
+
 This module is a wrapper class for all devices which can import a trigger from
 eg the MR scanner to PsychoPy.
 It aims to implement a uniform interface accross devices.
@@ -28,12 +29,14 @@ Front. Neuroinform. 2:10. doi:10.3389/neuro.11.010.2008
 2. CLASSES
 
 2.0 Introduction
+
 This module also support class registration. When adding a new device,
 inherit from the DeviceTrigger class and create a unique PORTTYPE class
 attribute. The new device will be added automatically to a registry which
 is accessible by the factory class.
 
 2.1 SCANNERTRIGGER
+
 The ScannerTrigger class is the factory class for the requested device.
 It accepts device-specific settings and other arguments and returns a fully
 functional trigger device object.
@@ -489,6 +492,7 @@ Copyright (C) 2018 Pieter Vandemaele
 Distributed under the terms of the GNU General Public License (GPL).
 
 7. PEP8 COMPLIANCY
+
 All files are PEP8 compliant (apart from one or two E5012 and W503 codes).
 For W503, breaking before or after the binary operator is allowed as long as
 the convention is consistent locally.
