@@ -98,9 +98,9 @@ accuracy.
 
 * SERIAL
 
-    A SERIAL object wraps a pyserial object.
-    The input parameters for the serial port trigger are compatible with
-    the parameters for the pyserial module:
+A SERIAL object wraps a pyserial object.
+The input parameters for the serial port trigger are compatible with
+the parameters for the pyserial module:
 
         port: none or device name
         baudrate: int (default: 9600)
