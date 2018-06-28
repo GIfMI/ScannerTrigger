@@ -83,8 +83,9 @@ The ScannerTrigger class implements only one public method:
 Possible inputs for portType and portConfig
 
 * DUMMY
-        A DUMMY object emits a trigger every n seconds with millisecond
-        accuracy.
+        
+A DUMMY object emits a trigger every n seconds with millisecond
+accuracy.
 
         tr: float (default: 1.0)
             Simulated TR in seconds
@@ -96,9 +97,10 @@ Possible inputs for portType and portConfig
             }
 
 * SERIAL
-        A SERIAL object wraps a pyserial object.
-        The input parameters for the serial port trigger are compatible with
-        the parameters for the pyserial module:
+
+    A SERIAL object wraps a pyserial object.
+    The input parameters for the serial port trigger are compatible with
+    the parameters for the pyserial module:
 
         port: none or device name
         baudrate: int (default: 9600)
@@ -146,12 +148,14 @@ Possible inputs for portType and portConfig
             }
 
 * PARALLEL
-        A PARALLEL object wraps the psychopy.parallel module.
-        Notice:
-            Make sure that when running on Microsoft Windows, the inpout32.dll
-            file shipped with this module is installed properly.
-            When running 64bit Python, you will need to install the 64bit
-            version (but this has not been tested).
+
+A PARALLEL object wraps the psychopy.parallel module.
+    
+Notice:
+    Make sure that when running on Microsoft Windows, the inpout32.dll
+    file shipped with this module is installed properly.
+    When running 64bit Python, you will need to install the 64bit
+    version (but this has not been tested).
 
         address: string
             Memory address or device node of the parallel port
@@ -173,7 +177,8 @@ Possible inputs for portType and portConfig
             }
 
 * CEDRUS
-        A CEDRUS object wraps the pyxid module.
+
+A CEDRUS object wraps the pyxid module.
 
         devicenr: int (default: 0)
             Devicenumber of the particular XID device.
@@ -190,8 +195,9 @@ Possible inputs for portType and portConfig
             }
 
 * KEYBOARD
-        A KEYBOARD object wraps the keyboard part of the psychopy.events
-        module.
+
+A KEYBOARD object wraps the keyboard part of the psychopy.events
+module.
 
         keyList: list of key values (default: '5')
             List of keys which are detected as a scan trigger
@@ -206,15 +212,16 @@ Possible inputs for portType and portConfig
             }
 
 * LAUNCHSCAN
-        A LAUNCHSCAN object uses the psychopy.hardware.emulator.launchScan
-        function to start synchronization.
-        After the first detected trigger, a KEYBOARD object catches the
-        triggers.
-        This functionality can also be implemented in a script by using the
-        launchScan function and a seperate KEYBOARD object.
-        The input parameters for the launchScan trigger are compatible with the
-        arameters for the launchScan function.
-        Some parameters (eg win) are ignored if not necessary.
+
+A LAUNCHSCAN object uses the psychopy.hardware.emulator.launchScan
+function to start synchronization.
+After the first detected trigger, a KEYBOARD object catches the
+triggers.
+This functionality can also be implemented in a script by using the
+launchScan function and a seperate KEYBOARD object.
+The input parameters for the launchScan trigger are compatible with the
+parameters for the launchScan function.
+Some parameters (eg win) are ignored if not necessary.
 
         wait_msg: string (default: 'waiting for scanner...')
             Waiting message displayed on the Window
@@ -253,10 +260,12 @@ Possible inputs for portType and portConfig
 
 
 2.2 DEVICETRIGGER
-    This is the base class for all trigger devices. The classes should inherit
-    from this class to be added to the registry.
+    
+This is the base class for all trigger devices. The classes should inherit
+from this class to be added to the registry.
 
-    Class attributes:
+Class attributes:
+
         registry: dictionary
             List of implemented trigger devices
             (classes inheriting from DeviceTrigger)
@@ -264,7 +273,7 @@ Possible inputs for portType and portConfig
         PORTTYPE: string
             A unique type for the device.
 
-    Instance attributes:
+Instance attributes:
         triggerCnt: int
             Counts elapsed triggers.
             This attribute has a getter, intended for internal use.
@@ -282,8 +291,8 @@ Possible inputs for portType and portConfig
             (eg serial.Serial object, parallel.Parallel object,
             pyxid.ResponseDevice), otherwise None.
 
-    Methods:
-        Override the necessary methods.
+Methods:
+    Override the necessary methods.
 
         def open():
             Initialize the encapsulated trigger device.
@@ -326,9 +335,10 @@ Possible inputs for portType and portConfig
                 exceeded.
                 Raises a DeviceTriggerException when user-interrupted.
 
-    The DeviceTrigger class also implements a getTrigger function which blocks
-    further execution. Overriding in the child classes is not necessary.
-        def getTriggerBlock():
+The DeviceTrigger class also implements a getTrigger function which blocks
+further execution. Overriding in the child classes is not necessary.
+
+    def getTriggerBlock():
             Checks if a trigger has been received.
 
             This function is blocking further execution and returns when
@@ -344,7 +354,8 @@ Possible inputs for portType and portConfig
                 Raises a DeviceTriggerException when user-interrupted.
 
 2.3 Device-specific classes
-    Following classes have been implemented:
+    
+Following classes have been implemented:
         SerialPortTrigger
         ParallelPortTrigger
         DummyTrigger
@@ -352,9 +363,10 @@ Possible inputs for portType and portConfig
         LaunchScanTrigger
         CedrusTrigger
 
-    The user can instantiate on object from one of these classes directly.
+The user can instantiate on object from one of these classes directly.
 
-    The initialization method is the same for all classes:
+The initialization method is the same for all classes:
+
     def __init__(self, win, globalClock, portConfig=None, **kwargs):
         Args:
             win: psychopy.visual.Window object
@@ -373,21 +385,23 @@ Possible inputs for portType and portConfig
         Exception:
             Raises a portNotFoundError (DeviceTriggerException) when no port
             is defined (a port name or a compatible device instance).
-    Other functions are described in 2.2
+Other functions are described in 2.2
 
 2.5 Exceptions
+
     class DeviceTriggerTimeoutException
         Raised when a timeout occurs.
 
     class DeviceTriggerException
         Raised in case of general exceptions.
 
-    The module has some DeviceTriggerException instances with a specific
-    message.
-    Those instances are raised where appropriate.
+The module has some DeviceTriggerException instances with a specific
+message.
+Those instances are raised where appropriate.
 
 
 3. LOGGING
+
 The DeviceTrigger class logs all events by default at level logging.DATA.
 This can be changed during the creation of the trigger.
 The output generated in the log is:
@@ -431,6 +445,7 @@ A possible implementation can be:
         return False
 
 4. KNOWN ISSUES
+
 There is an issue with the pyo library imported in PsychoPy.
 When importing the sound module from PsychoPy, the core.quit() function might
 not exit properly. This can be resolved by importing the sound module as first
@@ -440,6 +455,7 @@ PsychoPy crashes when virtual COM ports are being used. The crash happens in
 the device detection loop in pyxid.
 
 5 INSTALLATION
+
 Copy the appropriate folder to the root directory of your main script which
 imports the ScannerTriger Module. 
 Make sure the folder is called scannertrigger.
@@ -453,21 +469,21 @@ Documentation of demo.py:
 
 Demo of the ScannerTrigger module.
 
-Idea
-====
+* Idea
+
 This script, written in Python using PsychoPy demonstrates the use of the
 ScannerTrigger module.
 
-Input
-=====
+* Input
+
     Triggering - device to receive triggers from
     Scans to skip - number of triggers to skip before continuing
 
 To adjust device specific parameters, edit the appropriate MR_settings
 dictionary below.
 
-Output
-======
+* Output
+
 The script will detect triggers received from the selected device and displays
 some data:
     Trigger number - number of received trigger (zero based, it's Python!)
@@ -483,8 +499,8 @@ After finishing the loop, a histogram is displayed from the delta times.
 The script also prints out the mean, standard deviation, maximum and minimum of
 the delta times.
 
-Remark
-======
+* Remark
+
 This script was developed in PsychoPy 1.90.2 and runs in the Python2 and
 Python3 version.
 
