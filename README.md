@@ -28,57 +28,58 @@ Front. Neuroinform. 2:10. doi:10.3389/neuro.11.010.2008
 2. CLASSES
 
 2.0 Introduction
-    This module also support class registration. When adding a new device,
-    inherit from the DeviceTrigger class and create a unique PORTTYPE class
-    attribute. The new device will be added automatically to a registry which
-    is accessible by the factory class.
+This module also support class registration. When adding a new device,
+inherit from the DeviceTrigger class and create a unique PORTTYPE class
+attribute. The new device will be added automatically to a registry which
+is accessible by the factory class.
 
 2.1 SCANNERTRIGGER
-    The ScannerTrigger class is the factory class for the requested device.
-    It accepts device-specific settings and other arguments and returns a fully
-    functional trigger device object.
+The ScannerTrigger class is the factory class for the requested device.
+It accepts device-specific settings and other arguments and returns a fully
+functional trigger device object.
     
-    The ScannerTrigger class implements only one public method:
+The ScannerTrigger class implements only one public method:
+
     class ScannerTrigger.create(win, portType=None, portConfig=None,
-                    timeout=999, globalClock=None, esc_key='escape')
+                timeout=999, globalClock=None, esc_key='escape')
 
-        win: psychopy.visual.Window object
-            The Window object in which the experiment runs
+    win: psychopy.visual.Window object
+        The Window object in which the experiment runs
+ 
+    portType: 'DUMMY', 'KEYBOARD', 'SERIAL', 'PARALLEL', 'LAUNCHSCAN'
+        Type of port for triggering
 
-        portType: 'DUMMY', 'KEYBOARD', 'SERIAL', 'PARALLEL', 'LAUNCHSCAN'
-            Type of port for triggering
+    portConfig: None or dictionary (default: None)
+        Dictionary with port-specific settings (see below)
 
-        portConfig: None or dictionary (default: None)
-            Dictionary with port-specific settings (see below)
+    timeout: int (default: 999)
+        Timeout value (in seconds) to abort waiting the start of a scan
 
-        timeout: int (default: 999)
-            Timeout value (in seconds) to abort waiting the start of a scan
+    globalClock: None or psychopy.core.Clock object (default: None)
+        The trigger device object needs a clock to report times. If a
+        global clock is provided, it will reset with the first trigger
+        received.
+        If none is provided, an internal clock will be instantiated.
+        Notice: if the globalClock is reset after the first scanner
+        trigger, the reported times will be relative to the last reset.
 
-        globalClock: None or psychopy.core.Clock object (default: None)
-            The trigger device object needs a clock to report times. If a
-            global clock is provided, it will reset with the first trigger
-            received.
-            If none is provided, an internal clock will be instantiated.
-            Notice: if the globalClock is reset after the first scanner
-            trigger, the reported times will be relative to the last reset.
+    logLevel: one of the possible levels defined by the psychopy.logging
+        module (default: logging.DATA) or a custom log level.
+        All events will be logged at the defined log level.
 
-        logLevel: one of the possible levels defined by the psychopy.logging
-            module (default: logging.DATA) or a custom log level.
-            All events will be logged at the defined log level.
+    esc_key: string (default: 'escape')
+        Keyboard character to manually abort waiting the first trigger.
 
-        esc_key: string (default: 'escape')
-            Keyboard character to manually abort waiting the first trigger.
+    device: device-specific object
+        If an instantiated device object is provided, all device-specific
+        settings in portConfig (see below) will be disregarded and the
+        provided device object will be used for the triggering.
+        This allows to share eg a serial port object between the
+        scannertrigger and other functions/classes.
 
-        device: device-specific object
-            If an instantiated device object is provided, all device-specific
-            settings in portConfig (see below) will be disregarded and the
-            provided device object will be used for the triggering.
-            This allows to share eg a serial port object between the
-            scannertrigger and other functions/classes.
+Possible inputs for portType and portConfig
 
-    Possible inputs for portType and portConfig
-
-    * DUMMY
+* DUMMY
         A DUMMY object emits a trigger every n seconds with millisecond
         accuracy.
 
@@ -91,7 +92,7 @@ Front. Neuroinform. 2:10. doi:10.3389/neuro.11.010.2008
                 'tr': 1.0,
             }
 
-    * SERIAL
+* SERIAL
         A SERIAL object wraps a pyserial object.
         The input parameters for the serial port trigger are compatible with
         the parameters for the pyserial module:
@@ -141,7 +142,7 @@ Front. Neuroinform. 2:10. doi:10.3389/neuro.11.010.2008
                 'sync': '5'
             }
 
-    * PARALLEL
+* PARALLEL
         A PARALLEL object wraps the psychopy.parallel module.
         Notice:
             Make sure that when running on Microsoft Windows, the inpout32.dll
@@ -168,7 +169,7 @@ Front. Neuroinform. 2:10. doi:10.3389/neuro.11.010.2008
                 'edge': ScannerTrigger.RISING
             }
 
-    * CEDRUS
+* CEDRUS
         A CEDRUS object wraps the pyxid module.
 
         devicenr: int (default: 0)
@@ -185,7 +186,7 @@ Front. Neuroinform. 2:10. doi:10.3389/neuro.11.010.2008
                 'sync': 4
             }
 
-    * KEYBOARD
+* KEYBOARD
         A KEYBOARD object wraps the keyboard part of the psychopy.events
         module.
 
@@ -201,15 +202,13 @@ Front. Neuroinform. 2:10. doi:10.3389/neuro.11.010.2008
                 'maxWait': 10
             }
 
-    * LAUNCHSCAN
+* LAUNCHSCAN
         A LAUNCHSCAN object uses the psychopy.hardware.emulator.launchScan
         function to start synchronization.
         After the first detected trigger, a KEYBOARD object catches the
         triggers.
-
         This functionality can also be implemented in a script by using the
         launchScan function and a seperate KEYBOARD object.
-
         The input parameters for the launchScan trigger are compatible with the
         arameters for the launchScan function.
         Some parameters (eg win) are ignored if not necessary.
@@ -230,7 +229,7 @@ Front. Neuroinform. 2:10. doi:10.3389/neuro.11.010.2008
         esc_key: key character (default: 'escape')
             Key to be used for user-interrupt during launch.
 
-        More info: http://www.psychopy.org/api/hardware/emulator.html
+    More info: http://www.psychopy.org/api/hardware/emulator.html
 
         example
             portType = 'LAUNCHSCAN'
