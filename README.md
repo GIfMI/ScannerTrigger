@@ -28,23 +28,17 @@ Front. Neuroinform. 2:10. doi:10.3389/neuro.11.010.2008
 2. CLASSES
 
 2.0 Introduction
-    This module uses the factory design pattern which means that depending on
-    the input parameters, a device-specific object is returned.
-    Independent of the chosen device, the interface is uniform.
-
     This module also support class registration. When adding a new device,
     inherit from the DeviceTrigger class and create a unique PORTTYPE class
     attribute. The new device will be added automatically to a registry which
     is accessible by the factory class.
 
 2.1 SCANNERTRIGGER
-
     The ScannerTrigger class is the factory class for the requested device.
     It accepts device-specific settings and other arguments and returns a fully
     functional trigger device object.
-
+    
     The ScannerTrigger class implements only one public method:
-
     class ScannerTrigger.create(win, portType=None, portConfig=None,
                     timeout=999, globalClock=None, esc_key='escape')
 
@@ -392,7 +386,6 @@ Front. Neuroinform. 2:10. doi:10.3389/neuro.11.010.2008
 
 
 3. LOGGING
-
 The DeviceTrigger class logs all events by default at level logging.DATA.
 This can be changed during the creation of the trigger.
 The output generated in the log is:
