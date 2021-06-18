@@ -454,7 +454,7 @@ in the import statements of your script.
 PsychoPy crashes when virtual COM ports are being used. The crash happens in
 the device detection loop in pyxid.
 
-## 5 INSTALLATION
+## 5. INSTALLATION
 
 Copy the appropriate folder to the root directory of your main script which
 imports the ScannerTriger Module. 
