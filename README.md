@@ -1,7 +1,7 @@
 # ScannerTrigger
 Python module implementing a wrapper script for multiple devices which can act as a MRI scanner trigger.
 
-1. INTRODUCTION
+## 1. INTRODUCTION
 
 This module is a wrapper class for all devices which can import a trigger from
 eg the MR scanner to PsychoPy.
@@ -26,16 +26,16 @@ J Neurosci Methods, 162(1-2):8-13
 Peirce JW (2009) Generating stimuli for neuroscience using PsychoPy.
 Front. Neuroinform. 2:10. doi:10.3389/neuro.11.010.2008
 
-2. CLASSES
+## 2. CLASSES
 
-2.0 Introduction
+### 2.0 Introduction
 
 This module also support class registration. When adding a new device,
 inherit from the DeviceTrigger class and create a unique PORTTYPE class
 attribute. The new device will be added automatically to a registry which
 is accessible by the factory class.
 
-2.1 SCANNERTRIGGER
+### 2.1 SCANNERTRIGGER
 
 The ScannerTrigger class is the factory class for the requested device.
 It accepts device-specific settings and other arguments and returns a fully
@@ -82,7 +82,7 @@ The ScannerTrigger class implements only one public method:
 
 Possible inputs for portType and portConfig
 
-* DUMMY
+#### DUMMY
         
 A DUMMY object emits a trigger every n seconds with millisecond
 accuracy.
@@ -96,7 +96,7 @@ accuracy.
                 'tr': 1.0,
             }
 
-* SERIAL
+#### SERIAL
 
 A SERIAL object wraps a pyserial object.
 The input parameters for the serial port trigger are compatible with
@@ -147,7 +147,7 @@ the parameters for the pyserial module:
                 'sync': '5'
             }
 
-* PARALLEL
+#### PARALLEL
 
 A PARALLEL object wraps the psychopy.parallel module.
     
@@ -176,7 +176,7 @@ Notice:
                 'edge': ScannerTrigger.RISING
             }
 
-* CEDRUS
+#### CEDRUS
 
 A CEDRUS object wraps the pyxid module.
 
@@ -194,7 +194,7 @@ A CEDRUS object wraps the pyxid module.
                 'sync': 4
             }
 
-* KEYBOARD
+#### KEYBOARD
 
 A KEYBOARD object wraps the keyboard part of the psychopy.events
 module.
@@ -211,7 +211,7 @@ module.
                 'maxWait': 10
             }
 
-* LAUNCHSCAN
+#### LAUNCHSCAN
 
 A LAUNCHSCAN object uses the psychopy.hardware.emulator.launchScan
 function to start synchronization.
@@ -259,7 +259,7 @@ Some parameters (eg win) are ignored if not necessary.
             }
 
 
-2.2 DEVICETRIGGER
+### 2.2 DEVICETRIGGER
     
 This is the base class for all trigger devices. The classes should inherit
 from this class to be added to the registry.
@@ -353,7 +353,7 @@ further execution. Overriding in the child classes is not necessary.
             Exception:
                 Raises a DeviceTriggerException when user-interrupted.
 
-2.3 Device-specific classes
+### 2.3 Device-specific classes
     
 Following classes have been implemented:
         SerialPortTrigger
@@ -387,7 +387,7 @@ The initialization method is the same for all classes:
             is defined (a port name or a compatible device instance).
 Other functions are described in 2.2
 
-2.5 Exceptions
+### 2.4 Exceptions
 
     class DeviceTriggerTimeoutException
         Raised when a timeout occurs.
@@ -400,7 +400,7 @@ message.
 Those instances are raised where appropriate.
 
 
-3. LOGGING
+## 3. LOGGING
 
 The DeviceTrigger class logs all events by default at level logging.DATA.
 This can be changed during the creation of the trigger.
@@ -444,7 +444,7 @@ A possible implementation can be:
         raise abortError
         return False
 
-4. KNOWN ISSUES
+## 4. KNOWN ISSUES
 
 There is an issue with the pyo library imported in PsychoPy.
 When importing the sound module from PsychoPy, the core.quit() function might
@@ -454,13 +454,13 @@ in the import statements of your script.
 PsychoPy crashes when virtual COM ports are being used. The crash happens in
 the device detection loop in pyxid.
 
-5 INSTALLATION
+## 5 INSTALLATION
 
 Copy the appropriate folder to the root directory of your main script which
 imports the ScannerTriger Module. 
 Make sure the folder is called scannertrigger.
 
-6. USAGE
+## 6. USAGE
 
 An example script demo.py using the ScannerTrigger module is shipped with this
 module.
@@ -507,7 +507,7 @@ Python3 version.
 Copyright (C) 2018 Pieter Vandemaele
 Distributed under the terms of the GNU General Public License (GPL).
 
-7. PEP8 COMPLIANCY
+## 7. PEP8 COMPLIANCY
 
 All files are PEP8 compliant (apart from one or two E5012 and W503 codes).
 For W503, breaking before or after the binary operator is allowed as long as
